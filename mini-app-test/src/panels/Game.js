@@ -19,6 +19,7 @@ const Game = ({locations, ...props}) => {
 
   useEffect(async () => {
     let randomLoc = locations[Math.floor(Math.random() * locations.length)]
+    console.log(randomLoc)
     setLocation(randomLoc)
   }, [location])
   useEffect(async () => {
@@ -30,16 +31,16 @@ const Game = ({locations, ...props}) => {
   const startGame = () => {
     let tempCards = []
     for (let i = 0; i < numberOfPlayers - 1; i++) {
-      tempCards.push({isSpy: false, location: location.name})
+      tempCards.push({isSpy: false, location: location.name, description: location.description})
     }
     if (numberOfPlayers > 6) {
       tempCards.pop()
-      tempCards.push({isSpy: true, location: 'Попробуй узнать, удачи!'})
-      tempCards.push({isSpy: true, location: 'Попробуй узнать, удачи!'})
+      tempCards.push({isSpy: true, location: 'Попробуй узнать, удачи!', description: null})
+      tempCards.push({isSpy: true, location: 'Попробуй узнать, удачи!', description: null})
     } else {
       tempCards.length === 0 ? tempCards.push({
         isSpy: true, location: 'Раз ломаешь инпут, играй один и попробуй узнать локацию, бугага!'
-      }) : tempCards.push({isSpy: true, location: 'Попробуй узнать, удачи!'})
+      }) : tempCards.push({isSpy: true, location: 'Попробуй узнать, удачи!', description: null})
     }
     for (let j = 0; j < 10; j++) {
       tempCards.sort(() => Math.random() - 0.5);
@@ -72,10 +73,13 @@ const Game = ({locations, ...props}) => {
       {/*  return <p key={`card-${idx}`}>{`${card.isSpy ? 'Шпион' : 'Обыватель'} - ${card.location}`}</p>*/}
       {/*})}*/}
       {tempPlayer < numberOfPlayers && !waitNextPlayer && <Card mode="outline">
-        <Div style={{height: 200, padding: '15px', backgroundImage: `url(${persik})`}}>
+        <Div style={{height: 200, padding: '15px',
+          // backgroundImage: `url(${persik})`
+        }}>
           <p>{`Игрок №${tempPlayer + 1}`}</p>
           <p>{`Ваша роль - ${cards[tempPlayer].isSpy ? 'Шпион' : 'Обыватель'}`}</p>
           <p>{`Локация - ${cards[tempPlayer].location}`}</p>
+          <p>{`Описание - ${cards[tempPlayer].description?cards[tempPlayer].description:'Засекречено!'}`}</p>
 
           <Button
             size='s'
@@ -89,7 +93,9 @@ const Game = ({locations, ...props}) => {
         </Div>
       </Card>}
       {tempPlayer < numberOfPlayers && waitNextPlayer && <Card mode="outline">
-        <Div style={{height: 200, padding: '15px', backgroundImage: `url(${persik})`}}>
+        <Div style={{height: 200, padding: '15px',
+          // backgroundImage: `url(${persik})`
+        }}>
           <p>{`Передайте телефон следующему игроку`}</p>
           <Button
             size='s'

@@ -7,10 +7,28 @@ import persik from '../img/persik.png';
 const Home = ({id, go, fetchedUser, setGameLocations, ...props}) => {
   const [sets] = useState([
     {
-      id: 1, name: 'Ибб на рукаве', locations: [
-        {id: 123, name: 'Пляж', descriptions: 'Вы находитесь на Гавайских остравах! Алоха, турбошурик :)'},
-        {id: 124, name: 'Освенцим', descriptions: 'Плюс в чат, кто решил ИБ за 10 ^_^'},
-        {id: 125, name: 'Рио', descriptions: 'Самбреро, мучачосы! Вы на карнавале!'},
+      id: 1, name: 'Инфобезное пати', locations: [
+        {id: 111, name: 'Хиросима', description: 'Вы очередной выживший счастливчик'},
+        {id: 112, name: 'Освенцим', description: 'Плюс в чат, кто решил ИБ за 10 ^_^'},
+        {id: 113, name: 'Рио', description: 'Самбреро, мучачосы! Вы на карнавале!'},
+      ]
+    },
+    {
+      id: 2, name: 'Летний вайб', locations: [
+        {id: 121, name: 'Пляж', description: 'Вы находитесь на Гавайских остравах! Алоха, турбошурик :)'},
+        {id: 122, name: 'Озеро', description: 'У бабули в деревне :)'},
+        {id: 123, name: 'Лагерь', description: 'Шарите за бесконечное лето?)'},
+        {id: 124, name: 'Рио', description: 'Самбреро, мучачосы! Вы на карнавале!'},
+        {id: 125, name: 'VKFest', description: 'Уже прикупили билеты?'},
+      ]
+    },
+    {
+      id: 3, name: 'Вездекод', locations: [
+        {id: 131, name: 'Иркутск', description: 'Самое время посмотреть на восьмое чудо света - Байкал!'},
+        {id: 132, name: 'Томск', description: 'Ох уже эти студенты... Они везде...'},
+        {id: 133, name: 'Владивосток', description: 'ASAP ДВФУ, респекты'},
+        {id: 134, name: 'Ульяновск', description: 'Тут был Ленин???'},
+        {id: 135, name: 'Челябинск', description: '- Кто? Челябинск? - Хватит мне звонить!'},
       ]
     }
 
@@ -49,7 +67,6 @@ const Home = ({id, go, fetchedUser, setGameLocations, ...props}) => {
                     onClick={(event) => handler(event, set.locations)}
                     data-to='game'
                     locations={set.locations}
-
                   >
                     Клац
                   </Button>
@@ -60,13 +77,6 @@ const Home = ({id, go, fetchedUser, setGameLocations, ...props}) => {
           </CardGrid>
         </Group>
       </Group>
-      {/*<Group header={<Header mode="secondary">Navigation Example</Header>}>*/}
-      {/*  <Div>*/}
-      {/*    <Button stretched size="l" mode="secondary" onClick={go} data-to="persik">*/}
-      {/*      Show me the Persik, please*/}
-      {/*    </Button>*/}
-      {/*  </Div>*/}
-      {/*</Group>*/}
     </Panel>
   )
 };
