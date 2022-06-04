@@ -43,7 +43,7 @@ const Home = ({id, go, fetchedUser, setGameLocations, ...props}) => {
             {sets.map((set) =>
               <Card mode="outline" key={set.id}>
                 <div style={{height: 200, padding: '15px', backgroundImage: `url(${persik})`}}>
-                 e <p>{set.name}</p>
+                  <p>{set.name}</p>
                   <Button
                     size='s'
                     onClick={(event) => handler(event, set.locations)}

@@ -13,6 +13,8 @@ const Game = ({locations, ...props}) => {
   const [numberOfPlayers, setNumberOfPlayers] = useState(2)
   const [cards, setCards] = useState([])
   const [tempPlayer, setTempPlayer] = useState(0)
+  const [waitNextPlayer, setWaitNextPlayer] = useState(false)
+
   useEffect(async () => {
     let randomLoc = locations[Math.floor(Math.random() * locations.length)]
     setLocation(randomLoc)
@@ -22,7 +24,6 @@ const Game = ({locations, ...props}) => {
     for (let i = 0; i < numberOfPlayers - 1; i++) {
       tempCards.push({isSpy: false, location: location.name})
     }
-    console.log(numberOfPlayers > 6)
     if (numberOfPlayers > 6) {
       tempCards.pop()
       tempCards.push({isSpy: true, location: 'Попробуй узнать, удачи!'})
@@ -36,7 +37,6 @@ const Game = ({locations, ...props}) => {
     for (let j = 0; j < 10; j++) {
       tempCards.sort(() => Math.random() - 0.5);
     }
-    console.log(tempCards)
     setCards(tempCards)
     setIsStarted(true)
   }
@@ -63,7 +63,7 @@ const Game = ({locations, ...props}) => {
         {/*{cards.map((card, idx) => {*/}
         {/*  return <p key={`card-${idx}`}>{`${card.isSpy ? 'Шпион' : 'Обыватель'} - ${card.location}`}</p>*/}
         {/*})}*/}
-        {tempPlayer < numberOfPlayers &&
+        {tempPlayer < numberOfPlayers && !waitNextPlayer &&
           <Card mode="outline">
             <div style={{height: 200, padding: '15px', backgroundImage: `url(${persik})`}}>
               <p>{`Игрок №${tempPlayer + 1}`}</p>
@@ -72,9 +72,25 @@ const Game = ({locations, ...props}) => {
 
               <Button
                 size='s'
-                onClick={() => setTempPlayer(tempPlayer + 1)}
+                onClick={() => setWaitNextPlayer(true)}
               >
-                Следующий игрок
+                {`${tempPlayer===numberOfPlayers-1?'Запустить таймер':'Следующий игрок'}`}
+              </Button>
+            </div>
+          </Card>
+        }
+        {tempPlayer < numberOfPlayers-1 && waitNextPlayer &&
+          <Card mode="outline">
+            <div style={{height: 200, padding: '15px', backgroundImage: `url(${persik})`}}>
+              <p>{`Передайте телефон следующему игроку`}</p>
+              <Button
+                size='s'
+                onClick={() => {
+                  setTempPlayer(tempPlayer + 1)
+                  setWaitNextPlayer(false)
+                }}
+              >
+                Показать роль
               </Button>
             </div>
           </Card>
