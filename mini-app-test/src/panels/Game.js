@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 
-import {Button, Card, FormItem, Group, Input, Panel, PanelHeader, PanelHeaderBack} from '@vkontakte/vkui';
+import {Button, Card, Div, FormItem, Group, Input, Panel, PanelHeader, PanelHeaderBack} from '@vkontakte/vkui';
 
 import persik from '../img/persik.png';
 import './Persik.css';
@@ -47,25 +47,25 @@ const Game = ({locations, ...props}) => {
     >
       Назад
     </PanelHeader>
-    {!isStarted && <Group>
-      <FormItem top="Фамилия">
+    {!isStarted && <Group style={{padding: '15px'}}>
+      <FormItem top="Фамилия" style={{padding: '0'}}>
         <Input type="number" value={numberOfPlayers} onChange={(e) => setNumberOfPlayers(e.target.value)}/>
       </FormItem>
-      <Button
-        size='s'
+      <Button style={{marginTop:'15px'}}
+        size='l'
         onClick={() => startGame()}
       >
         Раздать карты
       </Button></Group>}
     {isStarted &&
-      <>
+      <Group style={{padding: '15px'}}>
         {/*<p>Игра началась!<br/>Набор карт:</p>*/}
         {/*{cards.map((card, idx) => {*/}
         {/*  return <p key={`card-${idx}`}>{`${card.isSpy ? 'Шпион' : 'Обыватель'} - ${card.location}`}</p>*/}
         {/*})}*/}
         {tempPlayer < numberOfPlayers && !waitNextPlayer &&
           <Card mode="outline">
-            <div style={{height: 200, padding: '15px', backgroundImage: `url(${persik})`}}>
+            <Div style={{height: 200, padding: '15px', backgroundImage: `url(${persik})`}}>
               <p>{`Игрок №${tempPlayer + 1}`}</p>
               <p>{`Ваша роль - ${cards[tempPlayer].isSpy ? 'Шпион' : 'Обыватель'}`}</p>
               <p>{`Локация - ${cards[tempPlayer].location}`}</p>
@@ -76,12 +76,12 @@ const Game = ({locations, ...props}) => {
               >
                 {`${tempPlayer===numberOfPlayers-1?'Запустить таймер':'Следующий игрок'}`}
               </Button>
-            </div>
+            </Div>
           </Card>
         }
         {tempPlayer < numberOfPlayers-1 && waitNextPlayer &&
           <Card mode="outline">
-            <div style={{height: 200, padding: '15px', backgroundImage: `url(${persik})`}}>
+            <Div style={{height: 200, padding: '15px', backgroundImage: `url(${persik})`}}>
               <p>{`Передайте телефон следующему игроку`}</p>
               <Button
                 size='s'
@@ -92,13 +92,13 @@ const Game = ({locations, ...props}) => {
               >
                 Показать роль
               </Button>
-            </div>
+            </Div>
           </Card>
         }
         {tempPlayer >= numberOfPlayers &&
           <p>Ваше время пошло</p>
         }
-      </>
+      </Group>
     }
   </Panel>)
 };
