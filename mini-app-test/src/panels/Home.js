@@ -40,6 +40,9 @@ const Home = ({id, go, fetchedUser, setGameLocations, ...props}) => {
     setGameLocations(locations)
     go(e)
   }
+  const createSet = () => {
+    console.log('Создание кастомки')
+  }
   return (
     <Panel id={id}>
       <PanelHeader>Spy Game</PanelHeader>
@@ -73,7 +76,17 @@ const Home = ({id, go, fetchedUser, setGameLocations, ...props}) => {
                 </div>
               </Card>
             )}
-
+            <Card mode="outline">
+              <div style={{height: 200, padding: '15px'}}>
+                <p>{`Новая категория`}</p>
+                <Button
+                  size='s'
+                  onClick={createSet}
+                >
+                  Создать кастомку
+                </Button>
+              </div>
+            </Card>
           </CardGrid>
         </Group>
       </Group>
