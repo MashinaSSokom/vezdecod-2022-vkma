@@ -21,6 +21,7 @@ const useCountdown = (totalTime) => {
       if (response.is_available) {
         if (countDown % 2 === 1) {
           await bridge.send("VKWebAppFlashSetLevel", {"level": 1});
+          await bridge.send("VKWebAppTapticNotificationOccurred", {"type": "warning"});
         } else {
           await bridge.send("VKWebAppFlashSetLevel", {"level": 0});
         }
