@@ -46,10 +46,11 @@ const Game = ({locations, ...props}) => {
       tempCards.push({isSpy: true, location: 'Попробуй узнать, удачи!', description: null})
       tempCards.push({isSpy: true, location: 'Попробуй узнать, удачи!', description: null})
     } else {
-      setNumberOfPlayers(1)
       tempCards.length === 0 ? tempCards.push({
         isSpy: true, location: 'Раз ломаешь инпут, играй один и попробуй узнать локацию, бугага!'
       }) : tempCards.push({isSpy: true, location: 'Попробуй узнать, удачи!', description: null})
+      if (!numberOfPlayers) {
+        setNumberOfPlayers(1)}
     }
     for (let j = 0; j < 10; j++) {
       tempCards.sort(() => Math.random() - 0.5);
