@@ -28,9 +28,21 @@ const Home = ({id, go, fetchedUser, setGameLocations, sets, setSet, ...props}) =
           <CardGrid size="m">
             {sets.map((set) =>
               <Card mode="outline" key={set.id}>
-                <div style={{height: 200, padding: '15px', backgroundImage: `url(${persik})`}}>
+                <Div style={{height: 250,
+                  backgroundImage: `url(${persik})`,
+                  backgroundSize:"cover",
+                  display:"flex",
+                  flexDirection:"column",
+                  justifyContent:"space-between",
+                  paddingBottom:"50px"
+                }}>
+                  <div>
+
                   <p>{set.name}</p>
+                  </div>
+                  <div>
                   <Button
+                    style={{marginRight:"5px"}}
                     size='s'
                     onClick={(event) => handleStart(event, set.locations)}
                     data-to='game'
@@ -40,18 +52,24 @@ const Home = ({id, go, fetchedUser, setGameLocations, sets, setSet, ...props}) =
                   </Button>
                   <Button
                     size='s'
+                    style={{marginTop:"5px"}}
                     onClick={(event) => handlerEdit(event, set)}
                     data-to='setinfo'
                     mode="secondary"
-                    style={{marginLeft: '5px'}}
                   >
-                    Редактировать набор
+                    Редактировать
                   </Button>
-                </div>
+                  </div>
+                </Div>
               </Card>
             )}
             <Card mode="outline">
-              <div style={{height: 200, padding: '15px'}}>
+              <Div style={{height: 250,
+                display:"flex",
+                flexDirection:"column",
+                justifyContent:"space-between",
+                paddingBottom:"50px"
+              }}>
                 <p>{`Новая категория`}</p>
                 <Button
                   size='s'
@@ -59,7 +77,7 @@ const Home = ({id, go, fetchedUser, setGameLocations, sets, setSet, ...props}) =
                 >
                   Создать кастомку
                 </Button>
-              </div>
+              </Div>
             </Card>
           </CardGrid>
         </Group>

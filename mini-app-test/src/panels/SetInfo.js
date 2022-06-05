@@ -93,7 +93,7 @@ const SetInfo = (props) => {
           >
             <CardGrid size="m">
               <Card mode="outline">
-                <div style={{height: 150, padding: '15px'}}>
+                <div style={{height: 250, padding: '15px'}}>
                   <p>{`Неизвестное место...`}</p>
                   <Button
                     size='s'
@@ -106,7 +106,7 @@ const SetInfo = (props) => {
               </Card>
               {locations.map((location) =>
                 <Card mode="outline" key={location.id}>
-                  <div style={{height: 150, padding: '15px'}}>
+                  <div style={{height: 250, padding: '15px'}}>
                     <p>{`Локация - ${location.name}`}</p>
                     <p>{`Описание - ${location.description}`}</p>
                     {/*<Button*/}

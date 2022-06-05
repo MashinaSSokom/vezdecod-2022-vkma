@@ -16,6 +16,7 @@ const App = () => {
   const [gameLocations, setGameLocations] = useState([]);
   const [getSet, setSet] = useState({})
   const [newLocation, setNewLocation] = useState({})
+  const [updated, setUpdated] = useState(false)
   const [sets, setSets] = useState([
     {
       id: 1, name: 'Инфобезное пати', locations: [
@@ -50,48 +51,70 @@ const App = () => {
         setScheme(data.scheme)
       }
     });
+
     async function fetchData() {
       const user = await bridge.send('VKWebAppGetUserInfo');
       setUser(user);
       setPopout(null);
     }
+
     fetchData();
   }, []);
 
+  // useEffect(() => {
+    // const localSets = localStorage.getItem('localSets')
+    // console.log('Получил', localSets)
+    // console.log(typeof localSets === undefined)
+    // if (typeof localSets === undefined && !updated) {
+    //   setSets(JSON.parse(localSets))
+    //   setUpdated(true)
+    // }
+  // }, []);
+  //
+  // useEffect( () => {
+  //
+  //   console.log('Сохраняю', JSON.stringify(sets))
+  //   setTimeout(() => localStorage.setItem('localSets', JSON.stringify(sets)), 500)
+  //
+  // }, [newLocation])
+
   useEffect(() => {
     const oldSets = JSON.parse(JSON.stringify(sets))
-    // console.log(oldSets)
-    // console.log(newLocation)
     let newSets = oldSets.map(set => {
       if (set.id === newLocation.setId) {
         set.locations.push(newLocation.location)
       }
       return set
     })
+    // localStorage.setItem('localSets', JSON.stringify(newSets))
     setSets(newSets)
-  }, [newLocation])
-  const go = e => {
-    setActivePanel(e.currentTarget.dataset.to);
-  };
+    setUpdated(false)
 
-  return (
-    <ConfigProvider scheme={scheme}>
-      <AdaptivityProvider>
-        <AppRoot>
-          <SplitLayout popout={popout}>
-            <SplitCol>
-              <View activePanel={activePanel}>
-                <Home id='home' fetchedUser={fetchedUser} go={go} setGameLocations={setGameLocations} sets={sets} setSet={setSet} newLocation={newLocation} />
-                <Persik id='persik' go={go}/>
-                <Game id='game' go={go} locations={gameLocations}/>
-                <SetInfo id={'setinfo'} go={go} getSet={getSet} setNewLocation={setNewLocation}/>
-              </View>
-            </SplitCol>
-          </SplitLayout>
-        </AppRoot>
-      </AdaptivityProvider>
-    </ConfigProvider>
-  );
+}, [newLocation]
+)
+const go = e => {
+  setActivePanel(e.currentTarget.dataset.to);
+};
+
+return (
+  <ConfigProvider scheme={scheme}>
+    <AdaptivityProvider>
+      <AppRoot>
+        <SplitLayout popout={popout}>
+          <SplitCol>
+            <View activePanel={activePanel}>
+              <Home id='home' fetchedUser={fetchedUser} go={go} setGameLocations={setGameLocations} sets={sets}
+                    setSet={setSet} newLocation={newLocation}/>
+              <Persik id='persik' go={go}/>
+              <Game id='game' go={go} locations={gameLocations}/>
+              <SetInfo id={'setinfo'} go={go} getSet={getSet} setNewLocation={setNewLocation}/>
+            </View>
+          </SplitCol>
+        </SplitLayout>
+      </AppRoot>
+    </AdaptivityProvider>
+  </ConfigProvider>
+);
 }
 
 export default App;
