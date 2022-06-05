@@ -37,14 +37,14 @@ const SetInfo = (props) => {
       const newLocation = {
         setId: props.getSet.id,
         location: {
-          id: locations[locations.length - 1].id + 1,
+          id: locations[locations.length - 1]?locations[locations.length - 1].id + 1: +`1${locations[locations.length - 1]}1`,
           name: firstInputRef.current.value,
           description: secondInputRef.current.value
         }
       }
       setLocations([...locations,
         {
-          id: locations[locations.length - 1].id + 1,
+          id: locations[locations.length - 1]?locations[locations.length - 1].id + 1: +`1${locations[locations.length - 1]}1`,
           name: firstInputRef.current.value,
           description: secondInputRef.current.value
         }])

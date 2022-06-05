@@ -16,6 +16,7 @@ const App = () => {
   const [gameLocations, setGameLocations] = useState([]);
   const [getSet, setSet] = useState({})
   const [newLocation, setNewLocation] = useState({})
+  const [newSet, setNewSet] = useState({})
   const [updated, setUpdated] = useState(false)
   const [sets, setSets] = useState([
     {
@@ -90,8 +91,18 @@ const App = () => {
     setSets(newSets)
     setUpdated(false)
 
-}, [newLocation]
-)
+}, [newLocation])
+  useEffect(() => {
+    if (newSet && newSet.id){
+      const oldSets = JSON.parse(JSON.stringify(sets))
+      oldSets.push(newSet)
+
+      // localStorage.setItem('localSets', JSON.stringify(newSets))
+      setSets(oldSets)
+      setUpdated(false)
+    }
+
+  }, [newSet])
 const go = e => {
   setActivePanel(e.currentTarget.dataset.to);
 };
@@ -104,7 +115,7 @@ return (
           <SplitCol>
             <View activePanel={activePanel}>
               <Home id='home' fetchedUser={fetchedUser} go={go} setGameLocations={setGameLocations} sets={sets}
-                    setSet={setSet} newLocation={newLocation}/>
+                    setSet={setSet} newLocation={newLocation} setNewSet={setNewSet}/>
               <Persik id='persik' go={go}/>
               <Game id='game' go={go} locations={gameLocations}/>
               <SetInfo id={'setinfo'} go={go} getSet={getSet} setNewLocation={setNewLocation}/>
