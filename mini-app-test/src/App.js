@@ -60,8 +60,15 @@ const App = () => {
 
   useEffect(() => {
     const oldSets = JSON.parse(JSON.stringify(sets))
-    console.log(oldSets)
-    console.log(newLocation)
+    // console.log(oldSets)
+    // console.log(newLocation)
+    let newSets = oldSets.map(set => {
+      if (set.id === newLocation.setId) {
+        set.locations.push(newLocation.location)
+      }
+      return set
+    })
+    setSets(newSets)
   }, [newLocation])
   const go = e => {
     setActivePanel(e.currentTarget.dataset.to);

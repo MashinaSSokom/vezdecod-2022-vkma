@@ -5,16 +5,6 @@ import {Panel, PanelHeader, Header, Button, Group, Cell, Div, Avatar, CardGrid, 
 import persik from '../img/persik.png';
 
 const Home = ({id, go, fetchedUser, setGameLocations, sets, setSet, ...props}) => {
-  useEffect(() => {
-    const customSets = localStorage.getItem('customSets')
-    if (customSets) {
-      console.log(customSets)
-      // setSets([...sets, ...customSets])
-    } else {
-      console.log()
-      localStorage.setItem('customSets', '')
-    }
-  }, [])
 
   const handleStart = (e, locations) => {
     setGameLocations(locations)
