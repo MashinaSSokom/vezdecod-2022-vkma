@@ -33,9 +33,6 @@ const Home = ({id, go, fetchedUser, setGameLocations, ...props}) => {
     }
 
   ])
-  useEffect(async () => {
-    console.log('kek')
-  }, [])
   const handler = (e, locations) => {
     setGameLocations(locations)
     go(e)
@@ -46,15 +43,6 @@ const Home = ({id, go, fetchedUser, setGameLocations, ...props}) => {
   return (
     <Panel id={id}>
       <PanelHeader>Spy Game</PanelHeader>
-      {/*{fetchedUser &&*/}
-      {/*  <Group header={<Header mode="secondary">User Data Fetched with VK Bridge</Header>}>*/}
-      {/*    <Cell*/}
-      {/*      before={fetchedUser.photo_200 ? <Avatar src={fetchedUser.photo_200}/> : null}*/}
-      {/*      description={fetchedUser.city && fetchedUser.city.title ? fetchedUser.city.title : ''}*/}
-      {/*    >*/}
-      {/*      {`${fetchedUser.first_name} ${fetchedUser.last_name}`}*/}
-      {/*    </Cell>*/}
-      {/*  </Group>}*/}
       <Group>
         <Group
           mode="plain"
